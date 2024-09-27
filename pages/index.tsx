@@ -1,10 +1,9 @@
-import React from 'react'
+import type { NextPage } from 'next'
 
-const Home: React.FC = () => {
+const Home: NextPage = () => {
   return (
     <div>
-      <h1>Larridin ERP Integration</h1>
-      <p>Welcome to the new project!</p>
+      <h1>Welcome to Larridin ERP Integration</h1>
     </div>
   )
 }
