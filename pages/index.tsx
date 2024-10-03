@@ -94,7 +94,7 @@ export default function LarridinAIForERPDemo() {
       completed: false,
       aiSuggestions: {
         'John Doe': 'Assign to John to review equipment specifications from a quality perspective.',
-        'Jane Smith': 'Delegate to Jane to assess the equipment's impact on production workflow.',
+        'Jane Smith': 'Delegate to Jane to assess impact of the equipment on production workflow.',
         'Mike Johnson': 'Ideal for Mike as the Safety Inspector. Recommend performing thorough safety checks and documenting findings.'
       }
     }
