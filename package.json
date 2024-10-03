@@ -9,31 +9,32 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "^12.3.4",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "@radix-ui/react-avatar": "^1.0.3",
-    "@radix-ui/react-checkbox": "^1.0.4",
-    "@radix-ui/react-label": "^2.0.2",
-    "@radix-ui/react-progress": "^1.0.3",
-    "@radix-ui/react-scroll-area": "^1.0.4",
-    "@radix-ui/react-switch": "^1.0.3",
-    "@radix-ui/react-tabs": "^1.0.3",
-    "@radix-ui/react-tooltip": "^1.0.6",
-    "class-variance-authority": "^0.6.0",
-    "clsx": "^1.2.1",
-    "lucide-react": "^0.244.0",
-    "tailwind-merge": "^1.13.2",
-    "tailwindcss-animate": "^1.0.6"
-  },
-  "devDependencies": {
-    "@types/node": "^14.14.41",
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
-    "typescript": "^4.3.5",
-    "autoprefixer": "^10.4.14",
-    "postcss": "^8.4.24",
-    "tailwindcss": "^3.3.2"
+  "next": "^13.4.7",
+  "react": "^18.2.0",
+  "react-dom": "^18.2.0",
+  "@radix-ui/react-avatar": "^1.0.3",
+  "@radix-ui/react-checkbox": "^1.0.4",
+  "@radix-ui/react-label": "^2.0.2",
+  "@radix-ui/react-progress": "^1.0.3",
+  "@radix-ui/react-scroll-area": "^1.0.4",
+  "@radix-ui/react-switch": "^1.0.3",
+  "@radix-ui/react-tabs": "^1.0.3",
+  "@radix-ui/react-tooltip": "^1.0.6",
+  "class-variance-authority": "^0.6.0",
+  "clsx": "^1.2.1",
+  "lucide-react": "^0.244.0",
+  "tailwind-merge": "^1.13.2",
+  "tailwindcss-animate": "^1.0.6"
+},
+"devDependencies": {
+  "@types/node": "^20.3.1",
+  "@types/react": "^18.2.12",
+  "@types/react-dom": "^18.2.5",
+  "typescript": "^5.1.3",
+  "autoprefixer": "^10.4.14",
+  "postcss": "^8.4.24",
+  "tailwindcss": "^3.3.2"
+}
   },
   "engines": {
     "node": ">=14.0.0"
