@@ -572,11 +572,15 @@ export default function LarridinAIForERPDemo() {
       <Card className="bg-gradient-to-br from-white to-gray-50 border-gray-200 shadow-md">
         <CardContent className="p-6">
           <ul className="list-disc list-inside space-y-4 text-gray-700">
-            <li><strong>Dashboard:</strong> Get an overview of your tasks, team capacity, and delegation effectiveness.</li>
-            <li><strong>Tasks:</strong> View and manage your tasks. Use AI suggestions to delegate tasks efficiently.</li>
-            <li><strong>Team:</strong> Monitor your team members' capacities, skills, and assigned tasks.</li>
-            <li><strong>Analytics:</strong> View detailed charts and metrics about task completion and team productivity.</li>
-            <li><strong>Integrations:</strong> Manage your SAP module integrations and customize import rules.</li>
+          <li><strong>Dashboard:</strong> Get an overview of your tasks, team capacity, and delegation effectiveness.</li>
+          <li><strong>Tasks:</strong> View and manage your tasks. Use AI suggestions to delegate tasks efficiently.</li>
+          <li><strong>Team:</strong> Monitor your team members' capacities, skills, and assigned tasks.</li>
+          <li><strong>Analytics:</strong> View detailed charts and metrics about task completion and team productivity.</li>
+          <li><strong>Integrations:</strong> Manage your SAP module integrations and customize import rules for ME, MM, and EHS modules.</li>
+          <li><strong>Delegation Settings:</strong> Customize AI delegation algorithm parameters, including factor weights and global preferences.</li>
+          <li><strong>Employee Portal:</strong> Access individual task management, time tracking, communication panel, and personal performance metrics.</li>
+          <li><strong>Future Modules:</strong> Preview upcoming features and enhancements planned for the application.</li>
+          <li><strong>Guide:</strong> Access this user guide for quick reference on how to use the application effectively.</li>
           </ul>
         </CardContent>
       </Card>
