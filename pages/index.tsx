@@ -13,6 +13,7 @@ export default Home */
 'use client'
 
 import React, { useState, useEffect } from 'react'
+import FutureModules from './FutureModules'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
@@ -598,6 +599,7 @@ export default function LarridinAIForERPDemo() {
     { id: 'analytics', label: 'Analytics', icon: <PieChart className="w-5 h-5" />, render: renderAnalytics },
     { id: 'integrations', label: 'Integrations', icon: <Settings className="w-5 h-5" />, render: renderIntegrations },
     { id: 'guide', label: 'Guide', icon: <BookOpen className="w-5 h-5" />, render: renderGuide },
+    { id: 'future-modules', label: 'Future Modules', icon: <Rocket className="w-5 h-5" />, render: FutureModules },
   ]
 
   return (
