@@ -1,6 +1,6 @@
 'use client'
 
-/ Larridin ERP v1.2 - Delegation Settings Integration
+// Larridin ERP v1.2 - Delegation Settings Integration
 
 import React, { useState, useEffect } from 'react'
 import FutureModules from '@/components/ui/FutureModules'
@@ -15,6 +15,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Switch } from "@/components/ui/switch"
 import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
+import { Slider } from "@/components/ui/slider"
+import { Sliders } from 'lucide-react'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { AlertCircle, BarChart, BookOpen, CheckCircle2, ChevronDown, ChevronUp, Clock, Factory, FileText, HelpCircle, Menu, MessageSquare, PieChart, Rocket, Settings, Sliders, User, Users, Zap } from 'lucide-react'
 
@@ -594,6 +596,7 @@ export default function LarridinAIForERPDemo() {
     { id: 'dashboard', label: 'Dashboard', icon: <BarChart className="w-5 h-5" />, render: renderDashboard },
     { id: 'tasks', label: 'Tasks', icon: <CheckCircle2 className="w-5 h-5" />, render: renderTasks },
     { id: 'team', label: 'Team', icon: <Users className="w-5 h-5" />, render: renderTeam },
+    { id: 'delegation-settings', label: 'Delegation Settings', icon: <Sliders className="w-5 h-5" />, render: renderDelegationSettings },
     { id: 'analytics', label: 'Analytics', icon: <PieChart className="w-5 h-5" />, render: renderAnalytics },
     { id: 'integrations', label: 'Integrations', icon: <Settings className="w-5 h-5" />, render: renderIntegrations },
     { id: 'delegation-settings', label: 'Delegation Settings', icon: <Sliders className="w-5 h-5" />, render: renderDelegationSettings },
