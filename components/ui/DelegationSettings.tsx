@@ -88,7 +88,7 @@ export default function DelegationSettings() {
               </div>
               <Slider
                 value={[factor.weight]}
-                onValueChange={(value) => handleFactorChange(index, value[0])}
+                onValueChange={(value: number[]) => handleFactorChange(index, value[0])}
                 max={100}
                 step={1}
                 className="[&_[role=slider]]:bg-purple-600"
