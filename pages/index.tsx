@@ -1,19 +1,7 @@
-/* import type { NextPage } from 'next'
-
-const Home: NextPage = () => {
-  return (
-    <div>
-      <h1>Welcome to Larridin ERP Integration</h1>
-    </div>
-  )
-}
-
-export default Home */
-
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import FutureModules from "@/components/ui/FutureModules"
+import FutureModules from '../components/FutureModules'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
@@ -25,7 +13,7 @@ import { Switch } from "@/components/ui/switch"
 import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
-import { AlertCircle, BarChart, BookOpen, CheckCircle2, ChevronDown, ChevronUp, Clock, Factory, FileText, HelpCircle, Menu, MessageSquare, PieChart, Settings, User, Users, Zap } from 'lucide-react'
+import { AlertCircle, BarChart, BookOpen, CheckCircle2, ChevronDown, ChevronUp, Clock, Factory, FileText, HelpCircle, Menu, MessageSquare, PieChart, Rocket, Settings, User, Users, Zap } from 'lucide-react'
 
 interface Task {
   id: string
