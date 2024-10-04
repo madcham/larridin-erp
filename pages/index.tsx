@@ -59,8 +59,8 @@ export default function LarridinAIForERPDemo() {
       completed: false,
       aiSuggestions: {
         'John Wertz': 'Delegate to John due to his expertise in quality control. Suggest reviewing recent changes in the assembly process.',
-        'Caitlin Robertson': 'Assign to Jane for her production line knowledge. Recommend checking for any defective components.',
-        'César Ramirez': 'Consider Mike for his fresh perspective. Advise consulting with the quality control team for a comprehensive review.'
+        'Caitlin Robertson': 'Assign to Caitlin for her production line knowledge. Recommend checking for any defective components.',
+        'César Ramirez': 'Consider César for his fresh perspective. Advise consulting with the quality control team for a comprehensive review.'
       }
     },
     {
@@ -72,9 +72,9 @@ export default function LarridinAIForERPDemo() {
       assignedTo: null,
       completed: false,
       aiSuggestions: {
-        'John Doe': 'Assign to John to verify current inventory levels before restocking.',
-        'Jane Smith': 'Delegate to Jane to leverage her production supervisor role. Suggest updating the production schedule accordingly.',
-        'Mike Johnson': 'Consider Mike to place the order with the preferred supplier, ensuring safety stock levels are maintained.'
+        'John Wertz': 'Assign to John to verify current inventory levels before restocking.',
+        'Caitlin Robertson': 'Delegate to Caitlin to leverage her production supervisor role. Suggest updating the production schedule accordingly.',
+        'César Ramirez': 'Consider César to place the order with the preferred supplier, ensuring safety stock levels are maintained.'
       }
     },
     {
@@ -86,9 +86,9 @@ export default function LarridinAIForERPDemo() {
       assignedTo: null,
       completed: false,
       aiSuggestions: {
-        'John Doe': 'Assign to John to review equipment specifications from a quality perspective.',
-        'Jane Smith': 'Delegate to Jane to assess impact of the equipment on production workflow.',
-        'Mike Johnson': 'Ideal for Mike as the Safety Inspector. Recommend performing thorough safety checks and documenting findings.'
+        'John Wertz': 'Assign to John to review equipment specifications from a quality perspective.',
+        'Caitlin Robertson': 'Delegate to Caitlin to assess impact of the equipment on production workflow.',
+        'César Ramirez': 'Ideal for César as the Safety Inspector. Recommend performing thorough safety checks and documenting findings.'
       }
     }
   ])
@@ -96,7 +96,7 @@ export default function LarridinAIForERPDemo() {
   const [teamMembers, setTeamMembers] = useState<TeamMember[]>([
     { 
       id: '1', 
-      name: 'John Doe', 
+      name: 'John Wertz', 
       role: 'Quality Control Specialist', 
       capacity: 75,
       skills: [
@@ -108,7 +108,7 @@ export default function LarridinAIForERPDemo() {
     },
     { 
       id: '2', 
-      name: 'Jane Smith', 
+      name: 'Catilin Robertson', 
       role: 'Production Supervisor', 
       capacity: 90,
       skills: [
@@ -120,7 +120,7 @@ export default function LarridinAIForERPDemo() {
     },
     { 
       id: '3', 
-      name: 'Mike Johnson', 
+      name: 'César Ramirez', 
       role: 'Safety Inspector', 
       capacity: 60,
       skills: [
