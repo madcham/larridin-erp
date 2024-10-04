@@ -17,7 +17,7 @@ interface Task {
   rationale: string
 }
 
-export default function EmployeePortal() {
+export const EmployeePortal: React.FC = () => {
   const [tasks, setTasks] = useState<Task[]>([
     { 
       id: '1', 

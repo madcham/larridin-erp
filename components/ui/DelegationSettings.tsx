@@ -17,7 +17,7 @@ interface GlobalPreference {
   description: string
 }
 
-export default function DelegationSettings() {
+export const DelegationSettings: React.FC = () => {
   const [factors, setFactors] = useState<DelegationFactor[]>([
     { 
       name: "Skill Level", 
@@ -68,6 +68,7 @@ export default function DelegationSettings() {
 
   const handleSave = () => {
     console.log("Saving settings:", { factors, preferences })
+    // Here you would typically send the settings to your backend
   }
 
   return (
