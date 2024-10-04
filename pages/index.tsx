@@ -1,9 +1,9 @@
 'use client'
 
 import React, { useState } from 'react'
-import FutureModules from '@/components/ui/FutureModules'
-import DelegationSettings from '@/components/ui/DelegationSettings'
-import EmployeePortal from '@/components/ui/EmployeePortal'
+import {FutureModules} from '@/components/ui/FutureModules'
+import {DelegationSettings} from '@/components/ui/DelegationSettings'
+import {EmployeePortal} from '@/components/ui/EmployeePortal'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
