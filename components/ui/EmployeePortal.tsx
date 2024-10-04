@@ -153,7 +153,7 @@ export default function EmployeePortal() {
               <span className="text-sm font-medium text-gray-600">Tasks Completed This Week</span>
               <span className="text-sm font-medium text-gray-600">15 / 20</span>
             </div>
-            <Progress value={75} className="w-full bg-gray-200" indicatorClassName="bg-purple-600" />
+            <Progress value={75} className="w-full" />
             <p className="text-sm text-gray-500">75% completion rate</p>
           </div>
 
@@ -164,7 +164,7 @@ export default function EmployeePortal() {
               <span className="text-sm font-medium text-gray-600">Work Quality Rating</span>
               <span className="text-sm font-medium text-gray-600">4.5 / 5</span>
             </div>
-            <Progress value={90} className="w-full bg-gray-200" indicatorClassName="bg-purple-600" />
+            <Progress value={90} className="w-full" />
             <p className="text-sm text-gray-500">90% quality rating</p>
           </div>
 
@@ -175,7 +175,7 @@ export default function EmployeePortal() {
               <span className="text-sm font-medium text-gray-600">Time Efficiency</span>
               <span className="text-sm font-medium text-gray-600">85%</span>
             </div>
-            <Progress value={85} className="w-full bg-gray-200" indicatorClassName="bg-purple-600" />
+            <Progress value={85} className="w-full" />
             <p className="text-sm text-gray-500">85% of tasks completed within estimated time</p>
           </div>
         </CardContent>
