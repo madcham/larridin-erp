@@ -58,9 +58,9 @@ export default function LarridinAIForERPDemo() {
       assignedTo: null,
       completed: false,
       aiSuggestions: {
-        'John Doe': 'Delegate to John due to his expertise in quality control. Suggest reviewing recent changes in the assembly process.',
-        'Jane Smith': 'Assign to Jane for her production line knowledge. Recommend checking for any defective components.',
-        'Mike Johnson': 'Consider Mike for his fresh perspective. Advise consulting with the quality control team for a comprehensive review.'
+        'John Wertz': 'Delegate to John due to his expertise in quality control. Suggest reviewing recent changes in the assembly process.',
+        'Caitlin Robertson': 'Assign to Jane for her production line knowledge. Recommend checking for any defective components.',
+        'César Ramirez': 'Consider Mike for his fresh perspective. Advise consulting with the quality control team for a comprehensive review.'
       }
     },
     {
