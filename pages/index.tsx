@@ -1,7 +1,10 @@
 'use client'
 
+/ Larridin ERP v1.2 - Delegation Settings Integration
+
 import React, { useState, useEffect } from 'react'
 import FutureModules from '@/components/ui/FutureModules'
+import DelegationSettings from '@/components/ui/DelegationSettings'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
@@ -13,7 +16,7 @@ import { Switch } from "@/components/ui/switch"
 import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
-import { AlertCircle, BarChart, BookOpen, CheckCircle2, ChevronDown, ChevronUp, Clock, Factory, FileText, HelpCircle, Menu, MessageSquare, PieChart, Rocket, Settings, User, Users, Zap } from 'lucide-react'
+import { AlertCircle, BarChart, BookOpen, CheckCircle2, ChevronDown, ChevronUp, Clock, Factory, FileText, HelpCircle, Menu, MessageSquare, PieChart, Rocket, Settings, Sliders, User, Users, Zap } from 'lucide-react'
 
 interface Task {
   id: string
@@ -580,12 +583,20 @@ export default function LarridinAIForERPDemo() {
     </div>
   )
 
+  const renderDelegationSettings = () => (
+    <div className="space-y-6">
+      <h2 className="text-2xl font-bold text-gray-800">Delegation Settings</h2>
+      <DelegationSettings />
+    </div>
+  )
+
   const tabs = [
     { id: 'dashboard', label: 'Dashboard', icon: <BarChart className="w-5 h-5" />, render: renderDashboard },
     { id: 'tasks', label: 'Tasks', icon: <CheckCircle2 className="w-5 h-5" />, render: renderTasks },
     { id: 'team', label: 'Team', icon: <Users className="w-5 h-5" />, render: renderTeam },
     { id: 'analytics', label: 'Analytics', icon: <PieChart className="w-5 h-5" />, render: renderAnalytics },
     { id: 'integrations', label: 'Integrations', icon: <Settings className="w-5 h-5" />, render: renderIntegrations },
+    { id: 'delegation-settings', label: 'Delegation Settings', icon: <Sliders className="w-5 h-5" />, render: renderDelegationSettings },
     { id: 'guide', label: 'Guide', icon: <BookOpen className="w-5 h-5" />, render: renderGuide },
     { id: 'future-modules', label: 'Future Modules', icon: <Rocket className="w-5 h-5" />, render: FutureModules },
   ]
