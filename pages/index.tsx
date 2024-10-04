@@ -1,21 +1,20 @@
 'use client'
 
 import React, { useState } from 'react'
-import {FutureModules} from '@/components/ui/FutureModules'
-import {DelegationSettings} from '@/components/ui/DelegationSettings'
-import {EmployeePortal} from '@/components/ui/EmployeePortal'
+import { FutureModules } from '@/components/ui/FutureModules'
+import { DelegationSettings } from '@/components/ui/DelegationSettings'
+import { EmployeePortal } from '@/components/ui/EmployeePortal'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { Badge } from "@/components/ui/badge"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Switch } from "@/components/ui/switch"
 import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
-import { AlertCircle, BarChart, BookOpen, CheckCircle2, ChevronDown, ChevronUp, Clock, Factory, FileText, HelpCircle, Menu, MessageSquare, PieChart, Rocket, Settings, Sliders, User, Users, Zap } from 'lucide-react'
+import { Input } from "@/components/ui/input"
+import { AlertCircle, BarChart, BookOpen, CheckCircle2, ChevronDown, ChevronUp, Clock, Factory, FileText, HelpCircle, Menu, MessageSquare, PieChart, Rocket, Settings, Sliders, User, Users, Zap, Send } from 'lucide-react'
 
 // Placeholder components (replace these with actual implementations)
 const FutureModules = () => (
