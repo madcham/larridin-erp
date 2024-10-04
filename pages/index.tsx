@@ -1,23 +1,96 @@
 'use client'
 
-// Larridin ERP v1.3 - Employee Portal Integration
-
 import React, { useState } from 'react'
-import FutureModules from '@/components/ui/FutureModules'
-import DelegationSettings from '@/components/ui/DelegationSettings'
-import EmployeePortal from '@/components/ui/EmployeePortal'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { Badge } from "@/components/ui/badge"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Switch } from "@/components/ui/switch"
 import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
-import { AlertCircle, BarChart, BookOpen, CheckCircle2, ChevronDown, ChevronUp, Clock, Factory, FileText, HelpCircle, Menu, MessageSquare, PieChart, Rocket, Settings, Sliders, User, Users, Zap } from 'lucide-react'
+import { Input } from "@/components/ui/input"
+import { AlertCircle, BarChart, BookOpen, CheckCircle2, ChevronDown, ChevronUp, Clock, Factory, FileText, HelpCircle, Menu, MessageSquare, PieChart, Rocket, Settings, Sliders, User, Users, Zap, Send } from 'lucide-react'
+
+// Placeholder components (replace these with actual implementations)
+const FutureModules = () => (
+  <div className="space-y-6">
+    <h2 className="text-2xl font-bold text-gray-800">Future Modules</h2>
+    <p>This is a placeholder for future modules.</p>
+  </div>
+)
+
+const DelegationSettings = () => (
+  <div className="space-y-6">
+    <h2 className="text-2xl font-bold text-gray-800">Delegation Settings</h2>
+    <p>This is a placeholder for delegation settings.</p>
+  </div>
+)
+
+const EmployeePortal = () => (
+  <div className="space-y-6">
+    <h2 className="text-2xl font-bold text-gray-800">Employee Portal</h2>
+    <p>This is a placeholder for the employee portal.</p>
+  </div>
+)
+
+// AI Assistant Chat Component
+const AIAssistantChat = () => {
+  const [isOpen, setIsOpen] = useState(false)
+  const [messages, setMessages] = useState([
+    { role: 'assistant', content: 'Hello! How can I assist you today?' }
+  ])
+  const [input, setInput] = useState('')
+
+  const handleSend = () => {
+    if (input.trim()) {
+      setMessages([...messages, { role: 'user', content: input }])
+      // Here you would typically send the message to your AI backend
+      // and then add the AI's response to the messages
+      setMessages(prev => [...prev, { role: 'assistant', content: 'I received your message: ' + input }])
+      setInput('')
+    }
+  }
+
+  return (
+    <div className="fixed bottom-4 right-4 w-80 z-50">
+      <Button
+        onClick={() => setIsOpen(!isOpen)}
+        className="mb-2 w-full"
+      >
+        {isOpen ? 'Close' : 'Open'} AI Assistant
+      </Button>
+      {isOpen && (
+        <Card className="h-96 flex flex-col">
+          <CardHeader>
+            <CardTitle>AI Assistant</CardTitle>
+          </CardHeader>
+          <CardContent className="flex-grow overflow-auto">
+            {messages.map((message, index) => (
+              <div key={index} className={`mb-2 ${message.role === 'user' ? 'text-right' : 'text-left'}`}>
+                <span className={`inline-block p-2 rounded-lg ${message.role === 'user' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}>
+                  {message.content}
+                </span>
+              </div>
+            ))}
+          </CardContent>
+          <div className="p-4 border-t flex">
+            <Input
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Type your message..."
+              className="flex-grow mr-2"
+            />
+            <Button onClick={handleSend}>
+              <Send className="h-4 w-4" />
+            </Button>
+          </div>
+        </Card>
+      )}
+    </div>
+  )
+}
 
 interface Task {
   id: string
@@ -198,7 +271,6 @@ export default function LarridinAIForERPDemo() {
     setDelegationMessage(`Task delegated to ${assignedMember?.name}!`)
     setTimeout(() => setDelegationMessage(null), 3000)
 
-    // Update team member capacity and assigned tasks
     setTeamMembers(teamMembers.map(member =>
       member.id === memberId ? { 
         ...member, 
@@ -572,15 +644,15 @@ export default function LarridinAIForERPDemo() {
       <Card className="bg-gradient-to-br from-white to-gray-50 border-gray-200 shadow-md">
         <CardContent className="p-6">
           <ul className="list-disc list-inside space-y-4 text-gray-700">
-          <li><strong>Dashboard:</strong> Get an overview of your tasks, team capacity, and delegation effectiveness.</li>
-          <li><strong>Tasks:</strong> View and manage your tasks. Use AI suggestions to delegate tasks efficiently.</li>
-          <li><strong>Team:</strong> Monitor your team members' capacities, skills, and assigned tasks.</li>
-          <li><strong>Analytics:</strong> View detailed charts and metrics about task completion and team productivity.</li>
-          <li><strong>Integrations:</strong> Manage your SAP module integrations and customize import rules for ME, MM, and EHS modules.</li>
-          <li><strong>Delegation Settings:</strong> Customize AI delegation algorithm parameters, including factor weights and global preferences.</li>
-          <li><strong>Employee Portal:</strong> Access individual task management, time tracking, communication panel, and personal performance metrics.</li>
-          <li><strong>Future Modules:</strong> Preview upcoming features and enhancements planned for the application.</li>
-          <li><strong>Guide:</strong> Access this user guide for quick reference on how to use the application effectively.</li>
+            <li><strong>Dashboard:</strong> Get an overview of your tasks, team capacity, and delegation effectiveness.</li>
+            <li><strong>Tasks:</strong> View and manage your tasks. Use AI suggestions to delegate tasks efficiently.</li>
+            <li><strong>Team:</strong> Monitor your team members' capacities, skills, and assigned tasks.</li>
+            <li><strong>Analytics:</strong> View detailed charts and metrics about task completion and team productivity.</li>
+            <li><strong>Integrations:</strong> Manage your SAP module integrations and customize import rules for ME, MM, and EHS modules.</li>
+            <li><strong>Delegation Settings:</strong> Customize AI delegation algorithm parameters, including factor weights and global preferences.</li>
+            <li><strong>Employee Portal:</strong> Access individual task management, time tracking, communication panel, and personal performance metrics.</li>
+            <li><strong>Future Modules:</strong> Preview upcoming features and enhancements planned for the application.</li>
+            <li><strong>Guide:</strong> Access this user guide for quick reference on how to use the application effectively.</li>
           </ul>
         </CardContent>
       </Card>
@@ -611,7 +683,7 @@ export default function LarridinAIForERPDemo() {
     { id: 'delegation-settings', label: 'Delegation Settings', icon: <Sliders className="w-5 h-5" />, render: renderDelegationSettings },
     { id: 'employee-portal', label: 'Employee Portal', icon: <User className="w-5 h-5" />, render: renderEmployeePortal },
     { id: 'guide', label: 'Guide', icon: <BookOpen className="w-5 h-5" />, render: renderGuide },
-    { id: 'future-modules', label: 'Future Modules', icon: <Rocket className="w-5 h-5" />, render: FutureModules },
+    { id: 'future-modules', label: 'Future Modules', icon: <Rocket className="w-5 h-5" />, render: () => <FutureModules /> },
   ]
 
   return (
@@ -643,7 +715,12 @@ export default function LarridinAIForERPDemo() {
           {tabs.find((tab) => tab.id === activeTab)?.render()}
         </div>
       </main>
-      {/* ... (rest of the component remains unchanged) */}
+      {delegationMessage && (
+        <div className="fixed bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded-md shadow-lg">
+          {delegationMessage}
+        </div>
+      )}
+      <AIAssistantChat />
     </div>
   )
 }
