@@ -1,11 +1,10 @@
 'use client'
 
-// Larridin ERP v1.3 - Employee Portal Integration
-
 import React, { useState } from 'react'
 import { FutureModules } from '@/components/ui/FutureModules'
 import { DelegationSettings } from '@/components/ui/DelegationSettings'
 import { EmployeePortal } from '@/components/ui/EmployeePortal'
+import { MicroTaskBreakdown } from '@/components/ui/MicroTaskBreakdown'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
@@ -19,6 +18,12 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { AlertCircle, BarChart, BookOpen, CheckCircle2, ChevronDown, ChevronUp, Clock, Factory, FileText, HelpCircle, Menu, MessageSquare, PieChart, Rocket, Settings, Sliders, User, Users, Zap } from 'lucide-react'
 
+interface MicroTask {
+  id: string
+  description: string
+  completed: boolean
+}
+
 interface Task {
   id: string
   title: string
@@ -28,6 +33,7 @@ interface Task {
   assignedTo: string | null
   completed: boolean
   aiSuggestions: { [key: string]: string }
+  microTasks?: MicroTask[]
 }
 
 interface TeamMember {
@@ -61,7 +67,13 @@ export default function LarridinAIForERPDemo() {
         'John Wertz': 'Delegate to John due to his expertise in quality control. Suggest reviewing recent changes in the assembly process.',
         'Caitlin Robertson': 'Assign to Caitlin for her production line knowledge. Recommend checking for any defective components.',
         'César Ramirez': 'Consider César for his fresh perspective. Advise consulting with the quality control team for a comprehensive review.'
-      }
+      },
+      microTasks: [
+        { id: '1-1', description: 'Inspect door assembly line', completed: false },
+        { id: '1-2', description: 'Identify potential quality issues', completed: false },
+        { id: '1-3', description: 'Implement corrective measures', completed: false },
+        { id: '1-4', description: 'Verify quality improvement', completed: false },
+      ]
     },
     {
       id: '2',
@@ -75,7 +87,13 @@ export default function LarridinAIForERPDemo() {
         'John Wertz': 'Assign to John to verify current inventory levels before restocking.',
         'Caitlin Robertson': 'Delegate to Caitlin to leverage her production supervisor role. Suggest updating the production schedule accordingly.',
         'César Ramirez': 'Consider César to place the order with the preferred supplier, ensuring safety stock levels are maintained.'
-      }
+      },
+      microTasks: [
+        { id: '2-1', description: 'Check current inventory levels', completed: false },
+        { id: '2-2', description: 'Calculate required materials', completed: false },
+        { id: '2-3', description: 'Place order with supplier', completed: false },
+        { id: '2-4', description: 'Update inventory system', completed: false },
+      ]
     },
     {
       id: '3',
@@ -89,7 +107,13 @@ export default function LarridinAIForERPDemo() {
         'John Wertz': 'Assign to John to review equipment specifications from a quality perspective.',
         'Caitlin Robertson': 'Delegate to Caitlin to assess impact of the equipment on production workflow.',
         'César Ramirez': 'Ideal for César as the Safety Inspector. Recommend performing thorough safety checks and documenting findings.'
-      }
+      },
+      microTasks: [
+        { id: '3-1', description: 'Review equipment documentation', completed: false },
+        { id: '3-2', description: 'Perform visual inspection', completed: false },
+        { id: '3-3', description: 'Test equipment functionality', completed: false },
+        { id: '3-4', description: 'Document findings and recommendations', completed: false },
+      ]
     }
   ])
 
@@ -220,55 +244,58 @@ export default function LarridinAIForERPDemo() {
     <ScrollArea className="h-[400px]">
       <div className="space-y-4">
         {tasks.map(task => (
-          <Card key={task.id} className="bg-gradient-to-br from-white to-gray-50 border-gray-200 shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
-            <CardContent className="p-4">
-              <div className="flex justify-between items-start mb-2">
-                <h3 className="text-lg font-bold text-gray-800">{task.title}</h3>
-                <Badge className={`${getPriorityColor(task.priority)} text-white`}>{task.priority}</Badge>
-              </div>
-              <div className="flex flex-wrap gap-2 mb-2">
-                <Badge variant="outline" className="text-blue-600 border-blue-600">
-                  <Clock className="w-3 h-3 mr-1" />
-                  {task.estimatedTime}
-                </Badge>
-                <Badge variant="outline" className="text-purple-600 border-purple-600">
-                  {task.source}
-                </Badge>
-              </div>
-              <div className="mt-4">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="w-full justify-start text-left bg-blue-50 hover:bg-blue-100 text-blue-700 border-blue-200"
-                  onClick={() => setSelectedTask(selectedTask === task.id ? null : task.id)}
-                >
-                  <Zap className="mr-2 h-4 w-4 text-yellow-500" />
-                  AI Suggestions
-                  {selectedTask === task.id ? <ChevronUp className="ml-auto h-4 w-4" /> : <ChevronDown className="ml-auto h-4 w-4" />}
-                </Button>
-                {selectedTask === task.id && (
-                  <div className="mt-2 p-2 bg-blue-50 rounded-md border border-blue-200">
-                    {Object.entries(task.aiSuggestions).map(([memberId, suggestion]) => {
-                      const member = teamMembers.find(m => m.name === memberId)
-                      return (
-                        <div key={memberId} className="mb-2 last:mb-0">
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            className="w-full justify-start text-left mb-1 bg-white hover:bg-gray-50 text-gray-800 border-gray-300"
-                            onClick={() => handleDelegateClick(task.id, member!.id)}
-                          >
-                            Delegate to {memberId}
-                          </Button>
-                          <p className="text-sm text-gray-600 pl-2">{suggestion}</p>
-                        </div>
-                      )
-                    })}
-                  </div>
-                )}
-              </div>
-            </CardContent>
-          </Card>
+          <React.Fragment key={task.id}>
+            <Card className="bg-gradient-to-br from-white to-gray-50 border-gray-200 shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+              <CardContent className="p-4">
+                <div className="flex justify-between items-start mb-2">
+                  <h3 className="text-lg font-bold text-gray-800">{task.title}</h3>
+                  <Badge className={`${getPriorityColor(task.priority)} text-white`}>{task.priority}</Badge>
+                </div>
+                <div className="flex flex-wrap gap-2 mb-2">
+                  <Badge variant="outline" className="text-blue-600 border-blue-600">
+                    <Clock className="w-3 h-3 mr-1" />
+                    {task.estimatedTime}
+                  </Badge>
+                  <Badge variant="outline" className="text-purple-600 border-purple-600">
+                    {task.source}
+                  </Badge>
+                </div>
+                <div className="mt-4">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="w-full justify-start text-left bg-blue-50 hover:bg-blue-100 text-blue-700 border-blue-200"
+                    onClick={() => setSelectedTask(selectedTask === task.id ? null : task.id)}
+                  >
+                    <Zap className="mr-2 h-4 w-4 text-yellow-500" />
+                    AI Suggestions
+                    {selectedTask === task.id ? <ChevronUp className="ml-auto h-4 w-4" /> : <ChevronDown className="ml-auto h-4 w-4" />}
+                  </Button>
+                  {selectedTask === task.id && (
+                    <div className="mt-2 p-2 bg-blue-50 rounded-md border border-blue-200">
+                      {Object.entries(task.aiSuggestions).map(([memberId, suggestion]) => {
+                        const member = teamMembers.find(m => m.name === memberId)
+                        return (
+                          <div key={memberId} className="mb-2 last:mb-0">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="w-full justify-start text-left mb-1 bg-white hover:bg-gray-50 text-gray-800 border-gray-300"
+                              onClick={() => handleDelegateClick(task.id, member!.id)}
+                            >
+                              Delegate to {memberId}
+                            </Button>
+                            <p className="text-sm text-gray-600 pl-2">{suggestion}</p>
+                          </div>
+                        )
+                      })}
+                    </div>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+            <MicroTaskBreakdown task={task} />
+          </React.Fragment>
         ))}
       </div>
     </ScrollArea>
@@ -587,63 +614,117 @@ export default function LarridinAIForERPDemo() {
     </div>
   )
 
-  const renderDelegationSettings = () => (
-    <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-gray-800">Delegation Settings</h2>
-      <DelegationSettings />
-    </div>
-  )
-
-  const renderEmployeePortal = () => (
-    <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-gray-800">Employee Portal</h2>
-      <EmployeePortal />
-    </div>
-  )
-
-  const tabs = [
-    { id: 'dashboard', label: 'Dashboard', icon: <BarChart className="w-5 h-5" />, render: renderDashboard },
-    { id: 'tasks', label: 'Tasks', icon: <CheckCircle2 className="w-5 h-5" />, render: renderTasks },
-    { id: 'team', label: 'Team', icon: <Users className="w-5 h-5" />, render: renderTeam },
-    { id: 'analytics', label: 'Analytics', icon: <PieChart className="w-5 h-5" />, render: renderAnalytics },
-    { id: 'integrations', label: 'Integrations', icon: <Settings className="w-5 h-5" />, render: renderIntegrations },
-    { id: 'delegation-settings', label: 'Delegation Settings', icon: <Sliders className="w-5 h-5" />, render: renderDelegationSettings },
-    { id: 'employee-portal', label: 'Employee Portal', icon: <User className="w-5 h-5" />, render: renderEmployeePortal },
-    { id: 'guide', label: 'Guide', icon: <BookOpen className="w-5 h-5" />, render: renderGuide },
-    { id: 'future-modules', label: 'Future Modules', icon: <Rocket className="w-5 h-5" />, render: () => <FutureModules /> },
-  ]
-
   return (
-    <div className="flex h-screen bg-gradient-to-br from-purple-50 via-white to-blue-50">
-      <aside className="w-64 bg-gradient-to-b from-purple-600 to-blue-600 text-white p-4">
-        <div className="flex items-center mb-8">
-          <Factory className="w-8 h-8 text-white mr-2" />
-          <h1 className="text-2xl font-bold">Larridin AI for ERP</h1>
+    <div className="flex h-screen bg-gray-100">
+      <aside className="w-64 bg-white border-r border-gray-200">
+        <div className="p-4">
+          <h1 className="text-2xl font-bold text-gray-800">Larridin AI</h1>
+          <p className="text-sm text-gray-500">AI-Powered ERP Assistant</p>
         </div>
-        <nav className="space-y-2">
-          {tabs.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center w-full px-4 py-2 text-left rounded-lg transition-all duration-200 ${
-                activeTab === tab.id
-                  ? 'bg-white bg-opacity-20 text-white shadow-lg transform scale-105'
-                  : 'text-blue-100 hover:bg-white hover:bg-opacity-10'
-              }`}
-            >
-              {tab.icon}
-              <span className="ml-3">{tab.label}</span>
-            </button>
-          ))}
+        <nav className="mt-4">
+          <Button
+            variant={activeTab === 'dashboard' ? 'secondary' : 'ghost'}
+            className="w-full justify-start"
+            onClick={() => setActiveTab('dashboard')}
+          >
+            <PieChart className="mr-2 h-4 w-4" />
+            Dashboard
+          </Button>
+          <Button
+            variant={activeTab === 'tasks' ? 'secondary' : 'ghost'}
+            className="w-full justify-start"
+            onClick={() => setActiveTab('tasks')}
+          >
+            <CheckCircle2 className="mr-2 h-4 w-4" />
+            Tasks
+          </Button>
+          <Button
+            variant={activeTab === 'team' ? 'secondary' : 'ghost'}
+            className="w-full justify-start"
+            onClick={() => setActiveTab('team')}
+          >
+            <Users className="mr-2 h-4 w-4" />
+            Team
+          </Button>
+          <Button
+            variant={activeTab === 'analytics' ? 'secondary' : 'ghost'}
+            className="w-full justify-start"
+            onClick={() => setActiveTab('analytics')}
+          >
+            <BarChart className="mr-2 h-4 w-4" />
+            Analytics
+          </Button>
+          <Button
+            variant={activeTab === 'integrations' ? 'secondary' : 'ghost'}
+            className="w-full justify-start"
+            onClick={() => setActiveTab('integrations')}
+          >
+            <Factory className="mr-2 h-4 w-4" />
+            Integrations
+          </Button>
+          <Button
+            variant={activeTab === 'delegation' ? 'secondary' : 'ghost'}
+            className="w-full justify-start"
+            onClick={() => setActiveTab('delegation')}
+          >
+            <Sliders className="mr-2 h-4 w-4" />
+            Delegation Settings
+          </Button>
+          <Button
+            variant={activeTab === 'employee' ? 'secondary' : 'ghost'}
+            className="w-full justify-start"
+            onClick={() => setActiveTab('employee')}
+          >
+            <User className="mr-2 h-4 w-4" />
+            Employee Portal
+          </Button>
+          <Button
+            variant={activeTab === 'future' ? 'secondary' : 'ghost'}
+            className="w-full justify-start"
+            onClick={() => setActiveTab('future')}
+          >
+            <Rocket className="mr-2 h-4 w-4" />
+            Future Modules
+          </Button>
+          <Button
+            variant={activeTab === 'guide' ? 'secondary' : 'ghost'}
+            className="w-full justify-start"
+            onClick={() => setActiveTab('guide')}
+          >
+            <BookOpen className="mr-2 h-4 w-4" />
+            Guide
+          </Button>
         </nav>
       </aside>
-      <main className="flex-1 p-8 overflow-auto">
-        <div className="max-w-6xl mx-auto">
-          {tabs.find((tab) => tab.id === activeTab)?.render()}
+      <main className="flex-1 p-6 overflow-auto">
+        <div className="max-w-4xl mx-auto">
+          <Tabs value={activeTab} className="space-y-4">
+            <TabsContent value="dashboard">{renderDashboard()}</TabsContent>
+            <TabsContent value="tasks">{renderTasks()}</TabsContent>
+            <TabsContent value="team">{renderTeam()}</TabsContent>
+            <TabsContent value="analytics">{renderAnalytics()}</TabsContent>
+            <TabsContent value="integrations">{renderIntegrations()}</TabsContent>
+            <TabsContent value="delegation"><DelegationSettings /></TabsContent>
+            <TabsContent value="employee"><EmployeePortal /></TabsContent>
+            <TabsContent value="future"><FutureModules /></TabsContent>
+            <TabsContent value="guide">{renderGuide()}</TabsContent>
+          </Tabs>
         </div>
       </main>
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button variant="outline" size="icon" className="fixed bottom-4 right-4">
+              <HelpCircle className="h-4 w-4" />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Need help? Click for support</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
       {delegationMessage && (
-        <div className="fixed bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded-md shadow-lg">
+        <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded-md shadow-lg">
           {delegationMessage}
         </div>
       )}
