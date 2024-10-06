@@ -58,6 +58,7 @@ export default function LarridinAIForERPDemo() {
     {
       id: '1',
       title: 'Resolve door assembly quality issue',
+      description: 'Investigate and resolve the quality issues in the door assembly process',  // Add description
       priority: 'High',
       estimatedTime: '2h',
       source: 'SAP Manufacturing Execution (ME)',
@@ -78,6 +79,7 @@ export default function LarridinAIForERPDemo() {
     {
       id: '2',
       title: 'Restock raw materials for production line B',
+      description: 'Ensure that production line B has sufficient raw materials for continued operation',  // Add description
       priority: 'Medium',
       estimatedTime: '1h',
       source: 'SAP Materials Management (MM)',
@@ -98,6 +100,7 @@ export default function LarridinAIForERPDemo() {
     {
       id: '3',
       title: 'Conduct safety inspection on new equipment',
+      description: 'Perform a comprehensive safety inspection on the newly installed equipment',  // Add description
       priority: 'High',
       estimatedTime: '3h',
       source: 'SAP Environment, Health, and Safety (EHS)',
