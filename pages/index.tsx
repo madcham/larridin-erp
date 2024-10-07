@@ -27,6 +27,7 @@ interface MicroTask {
 interface Task {
   id: string
   title: string
+  description: string
   priority: 'Low' | 'Medium' | 'High'
   estimatedTime: string
   source: string
@@ -264,7 +265,38 @@ export default function LarridinAIForERPDemo() {
                     {task.source}
                   </Badge>
                 </div>
-                {/* ... (rest of the card content) */}
+                <div className="mt-4">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="w-full justify-start text-left bg-blue-50 hover:bg-blue-100 text-blue-700 border-blue-200"
+                    onClick={() => setSelectedTask(selectedTask === task.id ? null : task.id)}
+                  >
+                    <Zap className="mr-2 h-4 w-4 text-yellow-500" />
+                    AI Suggestions
+                    {selectedTask === task.id ? <ChevronUp className="ml-auto h-4 w-4" /> : <ChevronDown className="ml-auto h-4 w-4" />}
+                  </Button>
+                  {selectedTask === task.id && (
+                    <div className="mt-2 p-2 bg-blue-50 rounded-md border border-blue-200">
+                      {Object.entries(task.aiSuggestions).map(([memberId, suggestion]) => {
+                        const member = teamMembers.find(m => m.name === memberId)
+                        return (
+                          <div key={memberId} className="mb-2 last:mb-0">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="w-full justify-start text-left mb-1 bg-white hover:bg-gray-50 text-gray-800 border-gray-300"
+                              onClick={() => handleDelegateClick(task.id, member!.id)}
+                            >
+                              Delegate to {memberId}
+                            </Button>
+                            <p className="text-sm text-gray-600 pl-2">{suggestion}</p>
+                          </div>
+                        )
+                      })}
+                    </div>
+                  )}
+                </div>
               </CardContent>
             </Card>
             <MicroTaskBreakdown task={task} />
@@ -576,7 +608,7 @@ export default function LarridinAIForERPDemo() {
             <li><strong>Team:</strong> Monitor your team members' capacities, skills, and assigned tasks.</li>
             <li><strong>Analytics:</strong> View detailed charts and metrics about task completion and team productivity.</li>
             <li><strong>Integrations:</strong> Manage your SAP module integrations and customize import rules for ME, MM, and EHS modules.</li>
-            <li><strong>Delegation Settings:</strong> Customize AI delegation algorithm parameters, including factor weights and global preferences.</li>
+            <li><strong>Delegation Settings:</strong> Customize AI delegation algorithm parameters, including factor weights an global preferences.</li>
             <li><strong>Employee Portal:</strong> Access individual task management, time tracking, communication panel, and personal performance metrics.</li>
             <li><strong>Future Modules:</strong> Preview upcoming features and enhancements planned for the application.</li>
             <li><strong>Guide:</strong> Access this user guide for quick reference on how to use the application effectively.</li>
